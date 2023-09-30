@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/building-solid.png" />
+    <link href="dist/css/style.min.css" rel="stylesheet" />
+    <title>Laboratorium Jaringan</title>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" />
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('./assets/images/background/net.png');
+    background-size: cover;
+}
+.container{
+    position: relative;
+    max-width: 370px;
+    width: 100%;
+    padding: 25px;
+    border-radius: 8px;
+    background-color: #2255a4;
+}
+.container header{
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+}
+.container form{
+    margin-top: 30px;
+}
+form .field{
+    margin-bottom: 20px;
+}
+form .input-field{
+    position: relative;
+    height: 55px;
+    width: 100%;
+}
+.input-field input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    padding: 0 15px;
+    border: 1px solid #d1d1d1;
+}
+.invalid .input{
+    border-color: #d93025;
+}
+.input-field .show-hide{
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #919191;
+    cursor: pointer;
+    padding: 3px;
+}
+.field .error{
+    display: flex;
+    align-items: center;
+    margin-top: 6px;
+    color: #f84c3f;
+    font-size: 13px;
+    display: none;
+}
+.invalid .error{
+    display: flex;
+}
+.create-password .error{
+    align-items: flex-start;
+}
+.create-password .error-icon{
+    margin-top: 4px;
+}
+.button{
+    margin: 25px 0 6px;
+}
+.button input{
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: green;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.button input:hover{
+    background-color: #0ef174;
+}
+footer{
+    position: absolute;
+    color: #fff;
+    padding: 100px;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+.username-exist{
+    display: none;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <header>Registrasi</header>
+        <form id="registration-form">
+            <div class="field nama-field">
+                <div class="input-field">
+                    <input type="text" placeholder="Nama Lengkap kamu" class="nama" name="nama" required>
+                </div>
+                <span class="error nama-error">
+			<p class="error-text">Mohon untuk membuat nama lengkap yang sesuai</p>
+                </span>
+            </div>
+            <div class="field kelompok-field">
+                <div class="input-field">
+                    <input type="text" placeholder="Nomor Kelompok kamu" class="kelompok" name="kelompok" required>
+                </div>
+                <span class="error kelompok-error">
+                    <p class="error-text">Hanya angka yang dapat dimasukkan</p>
+                </span>
+            </div>
+            <div class="field username-field">
+                <div class="input-field">
+                    <input type="text" placeholder="Buat username" class="username" name="username" required>
+                </div>
+                <span class="error username-error">
+                    <p class="error-text">Buatlah username dengan huruf kecil minimal 5 karakter yang terdapat underscore (opsional).</p>
+                </span>
+		 <span class="error username-exist">
+                    <p class="error-text">Username sudah digunakan</p>
+                </span>
+
+	    </div>
+	    <div class="field create-password">
+                <div class="input-field">
+                    <input type="password" placeholder="Buat password" class="password" name="password" required>
+                    <i class="bx bx-hide show-hide"></i>
+                </div>
+                <span class="error password-error">
+			<p class="error-text">Buatlah password minimal 8 karakter yang terdapat 1 angka, 1 huruf besar, dan 1 simbol {@$!%*?&}.</p>
+                </span>
+            </div>
+            <div class="field confirm-password">
+                <div class="input-field">
+                    <input type="password" placeholder="Konfirmasi password" class="cPassword">
+                    <i class="bx bx-hide show-hide"></i>
+                </div>
+                <span class="error password-error">
+                    <p class="error-text">Password tidak cocok!</p>
+                </span>
+            </div>
+            <div class="input-field button">
+                <input type="submit" value="Daftar">
+            </div>
+        </form>
+        <footer class="footer fixed-bottom align-bottom text-center">
+            Laboratorium Praktikum Jaringan Komputer Universitas Diponegoro
+        </footer>
+    </div>    
+    <script src="registrasi.js"></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/building-solid.png" />
+    <title>Laboratorium Jaringan</title>
+    <!-- Custom CSS -->
+    <link href="dist/css/style.min.css" rel="stylesheet" />
+    <style>
+      .custom-radius {
+        border-radius: 15px;
+      }
+      .bg-body {
+        background-image: url('./assets/images/background/net.png');
+        background-size: cover;
+      }
+      .text-white{
+        color: #fff;
+      }
+      footer{
+	      position: absolute;
+        color: #fff;
+        padding: 100px;
+        bottom: 0;
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+      }
+      .form-group label, .form-group input {
+	      border-radius: 5px;
+      } 
+      .btn.btn-success.btn-lg{
+        color: white;
+        background-color: #0062FC;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+      }
+     .btn.btn-success.btn-lg:hover{
+	      background-color: #00ADE5;
+     }
+    </style>
+  </head>
+  <body class="bg-body">
+    <div class="main-wrapper">
+      <div class="preloader">
+        <div class="lds-ripple">
+          <div class="lds-pos"></div>
+          <div class="lds-pos"></div>
+        </div>
+      </div>
+      <div class="d-flex mt-5">
+        <div class="auth-box mt-5">
+          <div id="loginform ">
+            <div class="col-12 ml-4">
+              <h1 class="text-white">SISTEM MONITORING</h1>
+            </div>
+            <div class="col-12 ml-4">
+              <h1 class="text-white">PRAKTIKUM JARINGAN KOMPUTER</h1>
+            </div>
+            <!-- Form -->
+            <form class="form-horizontal ml-5 mt-3 w-75" id="loginform">
+              <div class="row">
+                <div class="col-12 bg-info pt-5 pb-3 px-4 custom-radius">
+                  <div class="form-group row">
+                    <label
+                      for="inputUsername"
+                      class="col-sm-4 col-form-label bg-white text-dark text-center"
+                      >Username</label
+                    >
+                    <label
+                      for="inputUsername"
+                      class="col-sm-1 col-form-label text-white text-center"
+                      >:</label
+                    >
+                    <div class="col-sm-7 px-0">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="inputUsername"
+                        required
+                        autocomplete="off"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label
+                      for="inputPassword"
+                      class="col-sm-4 col-form-label bg-white text-dark text-center"
+                      >Password</label
+                    >
+                    <label
+                      for="inputPassword"
+                      class="col-sm-1 col-form-label text-white text-center"
+                      >:</label
+                    >
+                    <div class="col-sm-7 px-0">
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="inputPassword"
+                        required
+                        autocomplete="off"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 text-center">
+                    <button
+                      class="btn btn-success btn-lg masuk"
+                      type="button"
+                      name="action"
+                    >
+                      Masuk
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <footer>
+        Laboratorium Praktikum Jaringan Komputer Universitas Diponegoro
+      </footer>
+    </div>
+    <!-- ============================================================== -->
+    <!-- All Required js -->
+    <!-- ============================================================== -->
+    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugin js -->
+    <!-- ============================================================== -->
+    <script>
+      $('[data-toggle="tooltip"]').tooltip();
+      $('.preloader').fadeOut();
+      // ==============================================================
+      // Login and Recover Password
+      // ==============================================================
+      $('#to-recover').on('click', function () {
+        $('#loginform').slideUp();
+        $('#recoverform').fadeIn();
+      });
+      $('#to-login').click(function () {
+        $('#recoverform').hide();
+        $('#loginform').fadeIn();
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $('.masuk').click(function (e) {
+          e.preventDefault();
+          if (
+            $('#inputUsername').val() === '' ||
+            $('#inputPassword').val() === ''
+          ) {
+            alert('Username / Password tidak boleh kosong!');
+          } else {
+            $.ajax({
+              type: 'post',
+              url: './assets/php/admin.php?tipe=login',
+              contentType: 'application/json',
+              data: JSON.stringify({
+                username: $('#inputUsername').val(),
+                password: $('#inputPassword').val(),
+              }),
+              dataType: 'json',
+            })
+              .done(function (response) {
+                if (response.status === 1) {
+                  window.location.replace('admin/admin.php');
+                } else {
+                  alert(response.status_message);
+                }
+              })
+              .fail(function () {
+                alert('error!');
+              });
+          }
+        });
+
+        $(document).keypress(function (event) {
+          if (event.keyCode === 13) {
+            // Prevent the default form submission behavior
+            event.preventDefault();
+
+            if (
+              $('#inputUsername').val() === '' ||
+              $('#inputPassword').val() === ''
+            ) {
+              alert('Username / Password tidak boleh kosong!');
+            } else {
+              $.ajax({
+                type: 'post',
+                url: './assets/php/admin.php?tipe=login',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                  username: $('#inputUsername').val(),
+                  password: $('#inputPassword').val(),
+                }),
+                dataType: 'json',
+              })
+                .done(function (response) {
+                  if (response.status === 1) {
+                    window.location.replace('admin/admin.php');
+                  } else {
+                    alert(response.status_message);
+                  }
+                })
+                .fail(function () {
+                  alert('error!');
+                });
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
